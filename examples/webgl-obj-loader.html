@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        <canvas id="mycanvas" width="400" height="400">
+                Please use a browser that supports "canvas"      
+              </canvas>
+              <script src="./lib/webgl-obj-loader.js"></script>
+              <script>
+              var app = {};
+    app.meshes = {};
+
+var gl = document.getElementById('mycanvas').getContext('webgl');
+
+function webGLStart(meshes){
+  app.meshes = meshes;
+  // initialize the VBOs
+  OBJ.initMeshBuffers(gl, app.meshes.tree);
+console.log(app);
+gl.drawElements(gl.TRIANGLES, 5055, gl.UNSIGNED_SHORT, 0);
+
+  // refer to the initMeshBuffers docs for an example of
+  // how to render the mesh to the screen after calling
+  // initMeshBuffers
+}
+
+window.onload = function(){
+  OBJ.downloadMeshes({
+    'tree': './modules/tree_foliage_lod2.obj', // located in the models folder on the server
+  }, webGLStart);
+}
+              </script>
+</body>
+</html>
